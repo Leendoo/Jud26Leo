@@ -28,3 +28,6 @@ from actor
 group by first_name
 having count(first_name) >1)
 select count(*) from aggreageted_data;
+
+
+select * from film limit 10;
