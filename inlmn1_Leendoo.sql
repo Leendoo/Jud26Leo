@@ -70,9 +70,46 @@ values ('Apollo 11','1969-07-16');
 select * from moon_mission where spacecraft = 'Apollo 11';
 -- The inserted mission received mission_id 20.
 
+SET @new_mission_id = LAST_INSERT_ID();
+
+-- Task 12b
+-- Update the outcome of the inserted mission.
+update moon_mission
+set outcome = 'successful'
+where mission_id =  20;
+
+select * from moon_mission
+where mission_id = 20;
+
+-- Task 12c
+-- Delete the inserted mission using its mission_id.
 start transaction;
 delete from moon_mission
-where mission_id in (19,21,22);
+where mission_id = 20;
 
 commit;
 
+select * from moon_mission
+where mission_id = 20
+
+-- Task 13
+-- Update the outcome of Chandrayaan-2 to Successful.
+update moon_mission
+set outcome = 'successful'
+where spacecraft = 'chandrayaan-2';
+
+-- Task 14
+-- Delete all missions launched in 2010 or later.
+SELECT *
+FROM moon_mission
+WHERE launch_date >= '2010-01-01';
+
+start transaction;
+delete from moon_mission
+where launch_date >= '2010-01-01';
+
+commit;
+
+select *
+from moon_mission
+where launch_date >= '2010-01-01';
