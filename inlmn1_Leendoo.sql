@@ -58,7 +58,7 @@ where operator = 'NASA';
 -- Retrieve all missions where the mission type is Impactor.
 select *
 from moon_mission
-where mission_type = 'Impactor'
+where mission_type = 'Impactor';
 -- The query returns one row, but it should return two.
 -- One mission has an extra space before 'Impactor',
 -- which prevents it from matching the condition.
@@ -74,29 +74,51 @@ SET @new_mission_id = LAST_INSERT_ID();
 
 -- Task 12b
 -- Update the outcome of the inserted mission.
-update moon_mission
-set outcome = 'successful'
-where mission_id =  20;
 
-select * from moon_mission
-where mission_id = 20;
+-- Task 12a
+-- Insert a new mission launched before the year 2000.
+INSERT INTO moon_mission (spacecraft, launch_date)
+VALUES ('Apollo 11', '1969-07-16');
+
+SET @new_mission_id = LAST_INSERT_ID();
+
+SELECT *
+FROM moon_mission
+WHERE mission_id = @new_mission_id;
+
+-- The inserted mission received mission_id 20 during my test.
+
+
+-- Task 12b
+-- Update the outcome of the inserted mission.
+UPDATE moon_mission
+SET outcome = 'Successful'
+WHERE mission_id = @new_mission_id;
+
+SELECT *
+FROM moon_mission
+WHERE mission_id = @new_mission_id;
+
 
 -- Task 12c
 -- Delete the inserted mission using its mission_id.
-start transaction;
-delete from moon_mission
-where mission_id = 20;
+START TRANSACTION;
 
-commit;
+DELETE FROM moon_mission
+WHERE mission_id = @new_mission_id;
 
-select * from moon_mission
-where mission_id = 20
+COMMIT;
+
+SELECT *
+FROM moon_mission
+WHERE mission_id = @new_mission_id;
 
 -- Task 13
 -- Update the outcome of Chandrayaan-2 to Successful.
-update moon_mission
-set outcome = 'successful'
-where spacecraft = 'chandrayaan-2';
+
+UPDATE moon_mission
+SET outcome = 'Successful'
+WHERE spacecraft = 'Chandrayaan-2';
 
 -- Task 14
 -- Delete all missions launched in 2010 or later.
