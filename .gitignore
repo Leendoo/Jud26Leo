@@ -6,6 +6,7 @@ target/
 src/main/java/org/example/java26/agent/AIAgent.java
 
 ### IntelliJ IDEA ###
+database/Laboration1.sql
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
